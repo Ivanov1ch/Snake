@@ -12,13 +12,13 @@ public class Window extends JFrame {
 
     private GamePanel panel;
 
-    public Window(){
-        setTitle("Pong");
-        setSize(500, 500);
+    public Window(Color[] gridColors){
+        setTitle("Snake");
+        setSize(700, 700);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         Container pane = getContentPane();
-        panel = new GamePanel(this);
+        panel = new GamePanel(this, gridColors);
         pane.add(panel);
 
         setUndecorated(false);
