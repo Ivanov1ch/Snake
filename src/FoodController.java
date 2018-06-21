@@ -2,7 +2,7 @@
 // File:             FoodController.java
 // Created:          2018/06/19
 // Author:           danIv (Daniel Ivanovich)
-// Description:      The class that controls the food.
+// Description:      The class that controls the spawning and collecting of food.
 */
 
 import java.awt.*;
@@ -20,7 +20,7 @@ public class FoodController {
         this.foodOnGrid = new ArrayList<>();
     }
 
-    public void collectFood(Snake snake) {
+    public void collectFood(Snake snake, AudioManager audioManager) {
         Block head = snake.getHead();
 
         Block collectedFood = null;
@@ -32,7 +32,8 @@ public class FoodController {
             }
         }
 
-        if(collectedFood != null) {
+        if (collectedFood != null) {
+            audioManager.playFoodCollectedSound();
             collectedFood.pickedUp(snake);
             foodOnGrid.remove(collectedFood);
         }
@@ -48,11 +49,13 @@ public class FoodController {
 
         for (int i = 0; i < amountOfFoodToSpawn; i++) {
             ArrayList<Cell> openCells = getUnoccupiedCells(snake);
-            Block food = new Block(false, grid);
-            int index = gen.nextInt(openCells.size());
-            Cell chosen = openCells.get(index);
-            food.moveToCell(chosen);
-            foodOnGrid.add(food);
+            if (openCells.size() != 0) {
+                Block food = new Block(false, grid);
+                int index = gen.nextInt(openCells.size());
+                Cell chosen = openCells.get(index);
+                food.moveToCell(chosen);
+                foodOnGrid.add(food);
+            }
         }
     }
 
@@ -62,13 +65,13 @@ public class FoodController {
 
         ArrayList<Cell> unoccupiedCells = new ArrayList<>();
 
-        for(Cell[] column : columnArray){
-            for(Cell cell : column){
+        for (Cell[] column : columnArray) {
+            for (Cell cell : column) {
                 unoccupiedCells.add(cell);
             }
         }
 
-        for(Block block : snakeArray){
+        for (Block block : snakeArray) {
             for (Cell[] column : columnArray) {
                 for (Cell cell : column) {
                     if (cell.containsBlock(block))
@@ -77,7 +80,7 @@ public class FoodController {
             }
         }
 
-        for(Block food : foodOnGrid){
+        for (Block food : foodOnGrid) {
             for (Cell[] column : columnArray) {
                 for (Cell cell : column) {
                     if (cell.containsBlock(food))
@@ -90,8 +93,8 @@ public class FoodController {
         return unoccupiedCells;
     }
 
-    public void drawFood(Graphics g){
-        for(Block food : foodOnGrid){
+    public void drawFood(Graphics g) {
+        for (Block food : foodOnGrid) {
             food.draw(g);
         }
     }

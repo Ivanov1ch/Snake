@@ -13,10 +13,12 @@ public class Snake {
     private int length, direction; //0 = Right, 90 = Up, etc.
     private Block head;
     private Grid grid;
+    private Window window;
 
-    public Snake(int length, Grid grid) {
+    public Snake(int length, Grid grid, Window window) {
         this.length = length;
         this.grid = grid;
+        this.window = window;
         this.direction = 90; //Start going up
 
         for (int i = 0; i < this.length; i++) {
@@ -31,6 +33,8 @@ public class Snake {
         for (int y = cellsInSide; y > cellsInSide - this.length; y--) {
             blocks.get(length - (cellsInSide - y + 1)).placeBlock(cellsInSide / 2 - 1, y - 1);
         }
+
+        head.setColor(new Color(128, 0, 0));
     }
 
     public void draw(Graphics g) {
@@ -106,7 +110,13 @@ public class Snake {
 
     public void addBlock(Block block){
         blocks.add(block);
+        if(blocks.size() == Math.pow(grid.getNumCellsOnSide(), 2))
+            window.getPanel().victory();
     }
 
     public ArrayList<Block> getBlocks(){return blocks;}
+
+    public int getLength (){
+        return length;
+    }
 }

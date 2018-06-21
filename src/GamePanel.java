@@ -8,18 +8,18 @@
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
-import java.util.concurrent.TimeUnit;
 
 public class GamePanel extends JPanel {
     private Timer timer;
     private Window window;
     private int width, height;
-    private final int REFRESH_RATE = 375;
+    private final int REFRESH_RATE = 300;
     private Color[] gridColors;
     private Grid grid;
     private Snake snake;
     private FoodController foodController;
-    private GameOverRectangle gameOverRectangle = null;
+    private ResultsRectangle resultsRectangle = null;
+    private AudioManager audioManager;
     private boolean gameOver = false;
 
     public GamePanel(Window window, Color[] gridColors) {
@@ -38,9 +38,11 @@ public class GamePanel extends JPanel {
         addKeyListener(new UserKeyboardListener());
 
         grid = new Grid(window, this.gridColors);
-        snake = new Snake(5, grid);
+        snake = new Snake(5, grid, window);
 
         foodController = new FoodController(window, grid);
+        audioManager = new AudioManager();
+        audioManager.startBackgroundMusic();
     }
 
     public void paintComponent(Graphics g) {
@@ -49,8 +51,8 @@ public class GamePanel extends JPanel {
         snake.draw(g);
         foodController.drawFood(g);
         grid.drawOverlappingGridLines(g);
-        if (gameOverRectangle != null)
-            gameOverRectangle.draw(g);
+        if (resultsRectangle != null)
+            resultsRectangle.draw(g);
     }
 
     public class AnimationListener implements ActionListener {
@@ -62,7 +64,7 @@ public class GamePanel extends JPanel {
             if (snake.isGameOver())
                 gameOver();
 
-            foodController.collectFood(snake);
+            foodController.collectFood(snake, audioManager);
 
             if (foodController.amountOfFoodOnGrid() <= 1)
                 foodController.spawnFood(snake);
@@ -84,7 +86,7 @@ public class GamePanel extends JPanel {
                     } else
                         timer.restart();
                 } else {
-                    if (gameOverRectangle != null && gameOverRectangle.isRevealed()) {
+                    if (resultsRectangle != null && resultsRectangle.isRevealed()) {
                         resetSnake();
                     }
                 }
@@ -108,10 +110,21 @@ public class GamePanel extends JPanel {
         }
     }
 
+    public void victory(){
+        timer.stop();
+        audioManager.stopBackgroundMusic();
+        audioManager.startGameOverMusic();
+        resultsRectangle = new ResultsRectangle(window, snake, false);
+        resultsRectangle.reveal();
+        gameOver = true;
+    }
+
     private void gameOver() {
         timer.stop();
-        gameOverRectangle = new GameOverRectangle(window);
-        gameOverRectangle.reveal();
+        audioManager.stopBackgroundMusic();
+        audioManager.startGameOverMusic();
+        resultsRectangle = new ResultsRectangle(window, snake, true);
+        resultsRectangle.reveal();
         gameOver = true;
     }
 
@@ -124,14 +137,16 @@ public class GamePanel extends JPanel {
         grid = new Grid(window, this.gridColors);
 
         snake = null; //Destroy the old snake (with garbage collection)
-        snake = new Snake(5, grid);
+        snake = new Snake(5, grid, window);
 
         foodController = null; //Destroy the old FoodController
         foodController = new FoodController(window, grid);
 
         gameOver = false;
 
-        gameOverRectangle = null;
-        gameOverRectangle = new GameOverRectangle(window);
+        resultsRectangle = null;
+
+        audioManager.stopGameOverMusic();
+        audioManager.startBackgroundMusic();
     }
 }

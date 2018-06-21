@@ -74,4 +74,8 @@ public class Block {
         partOfSnake = true;
         snake.addBlock(this);
     }
+
+    public void setColor(Color color){
+        this.color = color;
+    }
 }
