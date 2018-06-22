@@ -48,6 +48,6 @@ public class Game {
     }
 
     public static void howToPlay(){
-        JOptionPane.showMessageDialog(null, "The objective of Snake is to grow as large as you can.\nEating food will make you grow.\n\nMove around with the Arrow Keys\nPress Space to Pause\nPress Escape to exit\n\nIf you overlap yourself or go out of bounds, you lose!", "How to play Snake", JOptionPane.QUESTION_MESSAGE);
+        JOptionPane.showMessageDialog(null, "The objective of Snake is to grow as large as you can.\nEating food will make you grow.\n\nMove around with the Arrow Keys or WASD\nPress Space to Pause\nPress Escape to exit\n\nIf you overlap yourself or go out of bounds, you lose!", "How to play Snake", JOptionPane.QUESTION_MESSAGE);
     }
 }

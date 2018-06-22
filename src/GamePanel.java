@@ -95,13 +95,13 @@ public class GamePanel extends JPanel {
                             resetSnake();
                         }
                     }
-                } else if (e.getKeyCode() == KeyEvent.VK_UP && !paused) {
+                } else if ((e.getKeyCode() == KeyEvent.VK_UP || e.getKeyCode() == KeyEvent.VK_W) && !paused) {
                     snake.setDirection(90);
-                } else if (e.getKeyCode() == KeyEvent.VK_DOWN && !paused) {
+                } else if ((e.getKeyCode() == KeyEvent.VK_DOWN || e.getKeyCode() == KeyEvent.VK_S)&& !paused) {
                     snake.setDirection(270);
-                } else if (e.getKeyCode() == KeyEvent.VK_LEFT && !paused) {
+                } else if ((e.getKeyCode() == KeyEvent.VK_LEFT || e.getKeyCode() == KeyEvent.VK_A)&& !paused) {
                     snake.setDirection(180);
-                } else if (e.getKeyCode() == KeyEvent.VK_RIGHT && !paused) {
+                } else if ((e.getKeyCode() == KeyEvent.VK_RIGHT || e.getKeyCode() == KeyEvent.VK_D) && !paused) {
                     snake.setDirection(0);
                 }
             }

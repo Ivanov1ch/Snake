@@ -3,13 +3,9 @@
   <component name="ChangeListManager">
     <list default="true" id="c64c337b-a1d2-4e46-9104-602887459e53" name="Default" comment="Made basic class skeletons">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Snake/Game.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Snake/Game.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Snake/GamePanel.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Snake/GamePanel.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Snake/ResultsRectangle.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Snake/ResultsRectangle.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Snake/GamePanel$UserKeyboardListener.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Snake/GamePanel$UserKeyboardListener.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Game.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/GamePanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GamePanel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ResultsRectangle.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ResultsRectangle.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Snake.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Snake.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -39,11 +35,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="GamePanel.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="GamePanel.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/GamePanel.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="391">
-              <caret line="90" column="24" selection-start-line="90" selection-start-column="24" selection-end-line="90" selection-end-column="24" />
+            <state relative-caret-position="-304">
+              <caret line="97" column="96" selection-start-line="97" selection-start-column="96" selection-end-line="97" selection-end-column="96" />
               <folding>
                 <element signature="e#5182#5183#0" expanded="true" />
                 <element signature="e#5226#5227#0" expanded="true" />
@@ -122,11 +118,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Game.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="Game.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/Game.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-202">
-              <caret line="25" column="20" selection-start-line="25" selection-start-column="20" selection-end-line="25" selection-end-column="20" />
+            <state relative-caret-position="223">
+              <caret line="50" column="175" selection-start-line="50" selection-start-column="175" selection-end-line="50" selection-end-column="175" />
               <folding>
                 <element signature="e#0#1978#0" expanded="true" />
                 <element signature="imports" expanded="true" />
@@ -187,11 +183,11 @@
         <option value="$PROJECT_DIR$/src/GameOverRectangle.java" />
         <option value="$PROJECT_DIR$/src/Window.java" />
         <option value="$PROJECT_DIR$/src/FoodController.java" />
-        <option value="$PROJECT_DIR$/src/Game.java" />
         <option value="$PROJECT_DIR$/src/AudioManager.java" />
         <option value="$PROJECT_DIR$/src/Snake.java" />
         <option value="$PROJECT_DIR$/src/ResultsRectangle.java" />
         <option value="$PROJECT_DIR$/src/GamePanel.java" />
+        <option value="$PROJECT_DIR$/src/Game.java" />
       </list>
     </option>
   </component>
@@ -342,11 +338,11 @@
       <window_info anchor="bottom" id="Event Log" order="7" side_tool="true" />
       <window_info anchor="right" id="Maven Projects" order="3" />
       <window_info anchor="bottom" id="Version Control" order="7" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.32591414" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.32591414" />
       <window_info anchor="bottom" id="Terminal" order="7" />
       <window_info id="Capture Tool" order="2" />
       <window_info id="Designer" order="2" />
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.2489019" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.2489019" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.3290938" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
@@ -839,17 +835,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Game.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-202">
-          <caret line="25" column="20" selection-start-line="25" selection-start-column="20" selection-end-line="25" selection-end-column="20" />
-          <folding>
-            <element signature="e#0#1978#0" expanded="true" />
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/Block.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="17">
@@ -874,11 +859,22 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/GamePanel.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="391">
-          <caret line="90" column="24" selection-start-line="90" selection-start-column="24" selection-end-line="90" selection-end-column="24" />
+        <state relative-caret-position="-304">
+          <caret line="97" column="96" selection-start-line="97" selection-start-column="96" selection-end-line="97" selection-end-column="96" />
           <folding>
             <element signature="e#5182#5183#0" expanded="true" />
             <element signature="e#5226#5227#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Game.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="223">
+          <caret line="50" column="175" selection-start-line="50" selection-start-column="175" selection-end-line="50" selection-end-column="175" />
+          <folding>
+            <element signature="e#0#1978#0" expanded="true" />
+            <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
