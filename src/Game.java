@@ -21,7 +21,8 @@ public class Game {
         while(true) {
             try {
                 URL url = new URL("https://techviral.net/wp-content/uploads/2017/02/Now-You-Can-Play-The-Nokia-3310s-Iconic-Snake-Game-On-Facebook-Messenger.png");
-                image = new ImageIcon(ImageIO.read(url));
+                if(image == null)
+                    image = new ImageIcon(ImageIO.read(url));
             } catch (MalformedURLException e) {
                 e.printStackTrace();
             } catch (IOException e) {

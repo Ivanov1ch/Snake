@@ -44,8 +44,10 @@ public class Snake {
     }
 
     public void setDirection(int direction) {
-        if(Math.abs(direction - this.direction) != 180) //Don't allow 180 degree turns
+        if(Math.abs(direction - this.direction) != 180) {
             this.direction = direction;
+            window.getPanel().setKeyPressed(true);
+        }
     }
 
     public void move() {
@@ -55,50 +57,51 @@ public class Snake {
 
         Cell moveLocation = null;
 
-        for(int i = 1; i < blocks.size(); i++){
-            if(i == 1){
+        for (int i = 1; i < blocks.size(); i++) {
+            if (i == 1) {
                 moveLocation = blocks.get(i).getCellLocation(grid);
                 blocks.get(i).moveToCell(headCellLocation);
-            } else{
+            } else {
                 Cell oldMoveLocation = moveLocation;
                 moveLocation = blocks.get(i).getCellLocation(grid);
                 blocks.get(i).moveToCell(oldMoveLocation);
             }
         }
+
     }
 
-    public boolean isGameOver(){
+    public boolean isGameOver() {
         //Check for overlap
 
         ArrayList<Cell> occupiedCells = new ArrayList<>();
 
-        for(Block block : blocks){
+        for (Block block : blocks) {
             occupiedCells.add(block.getCellLocation(grid));
         }
 
         boolean hasOverlaps = false;
 
-        for(int i = 0; i < occupiedCells.size(); i++){
+        for (int i = 0; i < occupiedCells.size(); i++) {
             Cell selectedCell = occupiedCells.get(i);
 
-            for(int j = 0; j < occupiedCells.size(); j++){
-                if(j == i) continue;
+            for (int j = 0; j < occupiedCells.size(); j++) {
+                if (j == i) continue;
 
-                if(selectedCell.getX() == occupiedCells.get(j).getX() && selectedCell.getY() == occupiedCells.get(j).getY()){
+                if (selectedCell.getX() == occupiedCells.get(j).getX() && selectedCell.getY() == occupiedCells.get(j).getY()) {
                     hasOverlaps = true;
                     break;
                 }
             }
         }
 
-        if(hasOverlaps)
+        if (hasOverlaps)
             return true;
 
         //Check for out of bounds
 
         boolean outOfBounds = false;
 
-        if(head.getCellX() < 0 || head.getCellX() >= grid.getNumCellsOnSide())
+        if (head.getCellX() < 0 || head.getCellX() >= grid.getNumCellsOnSide())
             outOfBounds = true;
         else if (head.getCellY() < 0 || head.getCellY() >= grid.getNumCellsOnSide())
             outOfBounds = true;
@@ -106,17 +109,21 @@ public class Snake {
         return outOfBounds;
     }
 
-    public Block getHead(){return head;}
+    public Block getHead() {
+        return head;
+    }
 
-    public void addBlock(Block block){
+    public void addBlock(Block block) {
         blocks.add(block);
-        if(blocks.size() == Math.pow(grid.getNumCellsOnSide(), 2))
+        if (blocks.size() == Math.pow(grid.getNumCellsOnSide(), 2))
             window.getPanel().victory();
     }
 
-    public ArrayList<Block> getBlocks(){return blocks;}
+    public ArrayList<Block> getBlocks() {
+        return blocks;
+    }
 
-    public int getLength (){
-        return length;
+    public int getScore() {
+        return blocks.size() - length;
     }
 }

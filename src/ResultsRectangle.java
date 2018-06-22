@@ -28,7 +28,10 @@ public class ResultsRectangle {
         g.setColor(new Color(255, 255, 255, opacity));
         g.fillRect(0, 0, game.getWidth(), game.getHeight());
 
-        g.setColor(new Color(255, 0, 0, opacity));
+        if(gameOver)
+            g.setColor(new Color(255, 0, 0, opacity));
+        else
+            g.setColor(new Color(0, 255, 0, opacity));
 
         Font oldFont = g.getFont();
 
@@ -64,7 +67,7 @@ public class ResultsRectangle {
         else
             g.setFont(new Font(oldFont.getName(), Font.PLAIN, 26));
 
-        drawCenteredString(g, "Your score was: " + snake.getLength(), 0, game.getWidth(), 350, 150);
+        drawCenteredString(g, "Your score was: " + snake.getScore(), 0, game.getWidth(), 350, 150);
 
         drawCenteredString(g, "Press Space to Continue...", 0, game.getWidth(), 550, 150);
 

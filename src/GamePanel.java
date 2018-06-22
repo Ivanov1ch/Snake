@@ -20,7 +20,7 @@ public class GamePanel extends JPanel {
     private FoodController foodController;
     private ResultsRectangle resultsRectangle = null;
     private AudioManager audioManager;
-    private boolean gameOver = false;
+    private boolean gameOver = false, keyPressed = false, paused = false;
 
     public GamePanel(Window window, Color[] gridColors) {
         this.window = window;
@@ -58,6 +58,7 @@ public class GamePanel extends JPanel {
     public class AnimationListener implements ActionListener {
 
         public void actionPerformed(ActionEvent e) {
+            keyPressed = false;
 
             snake.move();
 
@@ -77,27 +78,32 @@ public class GamePanel extends JPanel {
     public class UserKeyboardListener implements KeyListener {
         @Override
         public void keyPressed(KeyEvent e) {
-            if (e.getKeyCode() == KeyEvent.VK_ESCAPE) {
-                System.exit(0);
-            } else if (e.getKeyCode() == KeyEvent.VK_SPACE) {
-                if (!gameOver) {
-                    if (timer.isRunning()) {
-                        timer.stop();
-                    } else
-                        timer.restart();
-                } else {
-                    if (resultsRectangle != null && resultsRectangle.isRevealed()) {
-                        resetSnake();
+            if(!keyPressed) {
+                if (e.getKeyCode() == KeyEvent.VK_ESCAPE) {
+                    System.exit(0);
+                } else if (e.getKeyCode() == KeyEvent.VK_SPACE) {
+                    if (!gameOver) {
+                        if (timer.isRunning()) {
+                            timer.stop();
+                            paused = true;
+                        } else {
+                            timer.restart();
+                            paused = false;
+                        }
+                    } else {
+                        if (resultsRectangle != null && resultsRectangle.isRevealed()) {
+                            resetSnake();
+                        }
                     }
+                } else if (e.getKeyCode() == KeyEvent.VK_UP && !paused) {
+                    snake.setDirection(90);
+                } else if (e.getKeyCode() == KeyEvent.VK_DOWN && !paused) {
+                    snake.setDirection(270);
+                } else if (e.getKeyCode() == KeyEvent.VK_LEFT && !paused) {
+                    snake.setDirection(180);
+                } else if (e.getKeyCode() == KeyEvent.VK_RIGHT && !paused) {
+                    snake.setDirection(0);
                 }
-            } else if (e.getKeyCode() == KeyEvent.VK_UP) {
-                snake.setDirection(90);
-            } else if (e.getKeyCode() == KeyEvent.VK_DOWN) {
-                snake.setDirection(270);
-            } else if (e.getKeyCode() == KeyEvent.VK_LEFT) {
-                snake.setDirection(180);
-            } else if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
-                snake.setDirection(0);
             }
         }
 
@@ -112,8 +118,10 @@ public class GamePanel extends JPanel {
 
     public void victory(){
         timer.stop();
+        keyPressed = false;
+        paused = true;
         audioManager.stopBackgroundMusic();
-        audioManager.startGameOverMusic();
+        audioManager.startVictoryMusic();
         resultsRectangle = new ResultsRectangle(window, snake, false);
         resultsRectangle.reveal();
         gameOver = true;
@@ -121,6 +129,8 @@ public class GamePanel extends JPanel {
 
     private void gameOver() {
         timer.stop();
+        keyPressed = false;
+        paused = true;
         audioManager.stopBackgroundMusic();
         audioManager.startGameOverMusic();
         resultsRectangle = new ResultsRectangle(window, snake, true);
@@ -147,6 +157,14 @@ public class GamePanel extends JPanel {
         resultsRectangle = null;
 
         audioManager.stopGameOverMusic();
+        audioManager.stopVictorymusic();
         audioManager.startBackgroundMusic();
+
+        keyPressed = false;
+        paused = false;
+    }
+
+    public void setKeyPressed(boolean keyPressed){
+        this.keyPressed = keyPressed;
     }
 }
