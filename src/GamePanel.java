@@ -38,7 +38,7 @@ public class GamePanel extends JPanel {
         addKeyListener(new UserKeyboardListener());
 
         grid = new Grid(window, this.gridColors);
-        snake = new Snake(5, grid, window);
+        snake = new Snake(grid.getNumCellsOnSide() / 3 + 1, grid, window);
 
         foodController = new FoodController(window, grid);
         audioManager = new AudioManager();
