@@ -50,7 +50,7 @@ public class FoodController {
         for (int i = 0; i < amountOfFoodToSpawn; i++) {
             ArrayList<Cell> openCells = getUnoccupiedCells(snake);
             if (openCells.size() != 0) {
-                Block food = new Block(false, grid);
+                Block food = new Block(false, grid, null);
                 int index = gen.nextInt(openCells.size());
                 Cell chosen = openCells.get(index);
                 food.moveToCell(chosen);

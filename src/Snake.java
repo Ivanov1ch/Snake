@@ -13,16 +13,19 @@ public class Snake {
     private int length, direction; //0 = Right, 90 = Up, etc.
     private Block head;
     private Grid grid;
+    private Color snakeColor;
     private Window window;
 
-    public Snake(int length, Grid grid, Window window) {
+    public Snake(int length, Grid grid, Window window, Color snakeColor) {
         this.length = length;
         this.grid = grid;
         this.window = window;
         this.direction = 90; //Start going up
 
+        this.snakeColor = snakeColor;
+
         for (int i = 0; i < this.length; i++) {
-            blocks.add(new Block(true, grid));
+            blocks.add(new Block(true, grid, snakeColor));
         }
 
         head = blocks.get(0);
@@ -34,7 +37,7 @@ public class Snake {
             blocks.get(length - (cellsInSide - y + 1)).placeBlock(cellsInSide / 2 - 1, y - 1);
         }
 
-        head.setColor(new Color(128, 0, 0));
+        head.setColor(snakeColor.darker());
     }
 
     public void draw(Graphics g) {
@@ -44,7 +47,7 @@ public class Snake {
     }
 
     public void setDirection(int direction) {
-        if(Math.abs(direction - this.direction) != 180) {
+        if(Math.abs(direction - this.direction) != 180 && direction != this.direction) {
             this.direction = direction;
             window.getPanel().setKeyPressed(true);
         }
@@ -114,6 +117,7 @@ public class Snake {
     }
 
     public void addBlock(Block block) {
+        block.setColor(snakeColor);
         blocks.add(block);
         if (blocks.size() == Math.pow(grid.getNumCellsOnSide(), 2))
             window.getPanel().victory();

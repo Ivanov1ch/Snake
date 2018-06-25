@@ -12,13 +12,13 @@ public class Block {
     private Color color;
     private boolean partOfSnake;
 
-    public Block(boolean partOfSnake, Grid grid) {
+    public Block(boolean partOfSnake, Grid grid, Color snakeColor) {
         this.partOfSnake = partOfSnake;
         length = grid.getSquareSide();
         if (!partOfSnake) {
             this.color = Color.green;
         } else {
-            this.color = Color.red;
+            this.color = snakeColor;
         }
     }
 
@@ -70,7 +70,6 @@ public class Block {
     }
 
     public void pickedUp(Snake snake){
-        color = Color.red;
         partOfSnake = true;
         snake.addBlock(this);
     }

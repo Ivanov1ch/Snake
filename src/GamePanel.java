@@ -15,6 +15,7 @@ public class GamePanel extends JPanel {
     private int width, height;
     private final int REFRESH_RATE = 300;
     private Color[] gridColors;
+    private Color snakeColor;
     private Grid grid;
     private Snake snake;
     private FoodController foodController;
@@ -22,13 +23,15 @@ public class GamePanel extends JPanel {
     private AudioManager audioManager;
     private boolean gameOver = false, keyPressed = false, paused = false;
 
-    public GamePanel(Window window, Color[] gridColors) {
+    public GamePanel(Window window, Color[] gridColors, Color snakeColor) {
         this.window = window;
         this.height = window.getHeight();
         this.width = window.getWidth();
 
         this.gridColors = gridColors;
         setBackground(gridColors[0]);
+
+        this.snakeColor = snakeColor;
 
         setPreferredSize(new Dimension(width, height));
         setFocusable(true);
@@ -38,7 +41,7 @@ public class GamePanel extends JPanel {
         addKeyListener(new UserKeyboardListener());
 
         grid = new Grid(window, this.gridColors);
-        snake = new Snake(grid.getNumCellsOnSide() / 3 + 1, grid, window);
+        snake = new Snake(grid.getNumCellsOnSide() / 3 + 1, grid, window, snakeColor);
 
         foodController = new FoodController(window, grid);
         audioManager = new AudioManager();
@@ -80,7 +83,7 @@ public class GamePanel extends JPanel {
         public void keyPressed(KeyEvent e) {
             if(!keyPressed) {
                 if (e.getKeyCode() == KeyEvent.VK_ESCAPE) {
-                    System.exit(0);
+                    Game.resetWindow();
                 } else if (e.getKeyCode() == KeyEvent.VK_SPACE) {
                     if (!gameOver) {
                         if (timer.isRunning()) {
@@ -147,7 +150,7 @@ public class GamePanel extends JPanel {
         grid = new Grid(window, this.gridColors);
 
         snake = null; //Destroy the old snake (with garbage collection)
-        snake = new Snake(5, grid, window);
+        snake = new Snake(5, grid, window, snakeColor);
 
         foodController = null; //Destroy the old FoodController
         foodController = new FoodController(window, grid);
@@ -166,5 +169,11 @@ public class GamePanel extends JPanel {
 
     public void setKeyPressed(boolean keyPressed){
         this.keyPressed = keyPressed;
+    }
+
+    public void stopMusic(){
+        audioManager.stopGameOverMusic();
+        audioManager.stopVictorymusic();
+        audioManager.stopBackgroundMusic();
     }
 }
